@@ -119,14 +119,17 @@ import sys      # 系统模块，读命令行参数、设置输出编码
 
 只有全部合法才 `return` 出去。写成独立函数的好处是：主流程不用到处写判断，一眼就能看懂。
 
-### 3. 核心函数 `play_one_round()`
+### 3. 核心函数 `play_one_round(answer=None)`
 
 一局的全部逻辑：
 
 ```python
-answer = random.randint(low, high)   # 电脑出题
-count = 0                            # 计数器
+if answer is None:
+    answer = random.randint(low, high)   # 电脑出题（正常玩就走这里）
+count = 0                                # 计数器
 ```
+
+那个 `answer=None` 是给自检／测试留的口子：传了数字就用你指定的答案，方便稳定复现某一局的结果；正常玩游戏不传，电脑随机出题。
 
 然后是一个 `while True` 死循环，每轮做三件事：
 
@@ -236,4 +239,10 @@ git log --oneline           :: 看提交历史
 git push                    :: 推送到 GitHub
 ```
 
-仓库地址见 GitHub 上的 `SHUIZHILANLL/first`。
+仓库地址：<https://github.com/SHUIZHILANLL/first>
+
+克隆到本地：
+
+```cmd
+git clone git@github.com:SHUIZHILANLL/first.git
+```
